@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zomato PM Interview Simulator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: white;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #FF5733;
+        }
+        .chat-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .message {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 15px;
+        }
+        .user {
+            background-color: #1E1E1E;
+            border-left: 5px solid #FF5733;
+        }
+        .assistant {
+            background-color: #F5F5F5;
+            color: black;
+            border-left: 5px solid #FFC300;
+        }
+        .input-container {
+            margin-top: 20px;
+        }
+        input[type="text"] {
+            width: 70%;
+            padding: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #FF5733;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        select {
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🍱 Zomato PM Interview Simulator</h1>
+    <div class="chat-container">
+        <div id="chat-messages">
+            {% for msg in messages %}
+            <div class="message {{ msg.role }}">
+                {{ msg.content }}
+            </div>
+            {% endfor %}
+        </div>
+        <div class="input-container">
+            <form action="/send" method="post">
+                <input type="text" name="message" placeholder="Your response" required>
+                <button type="submit">Send</button>
+            </form>
+        </div>
+        <div class="input-container">
+            <form action="/restart" method="post">
+                <select name="case">
+                    {% for case in cases %}
+                    <option value="{{ case }}">{{ case }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit">Restart Interview</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

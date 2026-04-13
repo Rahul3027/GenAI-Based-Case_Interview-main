@@ -1,0 +1,33 @@
+Local Debug Report for GenAI-Based-Case_Interview-main
+
+Issues found and resolved:
+
+1. Jinja2 template rendering failure
+   - Error: "TypeError: unhashable type: 'dict'" when rendering `index.html`.
+   - Root cause: The app was using `Jinja2Templates` with template rendering and the server environment produced a template loader error.
+   - Fix: Replaced template rendering with raw HTML string construction in `main_app.py` for the `/`, `/send`, and `/restart` endpoints.
+   - Result: The application now serves the home page and chat pages successfully.
+
+2. Local server port conflict
+   - Error: "[Errno 10048] error while attempting to bind on address ('127.0.0.1', 8000): only one usage of each socket address..."
+   - Root cause: Another process was already using port 8000.
+   - Fix: Started the app on port `8001` for local verification.
+   - Result: The app is reachable at `http://127.0.0.1:8001/`.
+
+3. Template engine import cleanup
+   - Observation: `Jinja2Templates` and `Response` were imported but no longer used after the fix.
+   - Fix: Removed unused imports from `main_app.py`.
+
+Current verified behavior:
+- GET / returns the home interview page successfully.
+- POST /send processes a sample chat message and returns a response page successfully.
+- POST /restart resets the interview session successfully.
+- Vector store initializes correctly using local knowledge base files.
+- LLM initialization with `ChatGoogleGenerativeAI` succeeds, and a sample chat interaction completed with HTTP 200.
+
+Local server used for testing:
+- URL: http://127.0.0.1:8001/
+
+Notes:
+- The app still depends on a valid Google API key in `.env` as `GOOGLE_API_KEY`.
+- The local test completed successfully using the existing `.env` key.

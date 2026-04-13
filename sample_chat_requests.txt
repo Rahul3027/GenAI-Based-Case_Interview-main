@@ -1,0 +1,14 @@
+Sample local requests for the app:
+
+1. GET home page:
+   curl http://127.0.0.1:8001/
+
+2. POST chat message:
+   curl -X POST http://127.0.0.1:8001/send -d "message=Hello, I want to solve the lunch conversion issue."
+
+3. POST restart interview:
+   curl -X POST http://127.0.0.1:8001/restart -d "case=Delivery Complaints"
+
+Notes:
+- Use the same cookie/session when running POST requests to preserve the conversation state.
+- The app was tested successfully on port 8001.

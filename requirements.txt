@@ -3,5 +3,8 @@ langchain-google-genai
 langchain-community
 chromadb
 sentence-transformers
-streamlit
 python-dotenv
+fastapi
+uvicorn
+jinja2
+python-multipart
